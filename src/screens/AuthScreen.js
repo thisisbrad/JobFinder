@@ -1,28 +1,4 @@
 import React, { Component } from 'react';
-// import { Text, View, StyleSheet } from 'react-native';
-
-// class AuthScreen extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>Auth Screen</Text>
-//         <Text>Auth Screen</Text>
-//         <Text>Auth Screen</Text>
-//         <Text>Auth Screen</Text>
-//         <Text>Auth Screen</Text>
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: 'pink',
-//     alignItems: 'center',
-//     justifyContent: 'center'
-//   }
-// });
 
 import {
   Image,
@@ -36,7 +12,6 @@ import {
   View
 } from 'react-native';
 
-// import Expo from 'expo';
 import { Facebook } from 'expo';
 
 class AuthScreen extends Component {
