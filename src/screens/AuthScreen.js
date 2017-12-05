@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Facebook } from 'expo';
 
@@ -8,7 +8,6 @@ import * as actions from '../actions';
 class AuthScreen extends Component {
   componentDidMount() {
     this.props.facebookLogin();
-    // AsyncStorage.removeItem('fb_token');
     this.onAuthComplete(this.props);
   }
 

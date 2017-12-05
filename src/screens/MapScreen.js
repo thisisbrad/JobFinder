@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, AsyncStorage } from 'react-native';
 import { MapView } from 'expo';
 
 import { mapStyle } from '../config';
@@ -17,6 +17,8 @@ class MapScreen extends Component {
   onRegionChangeComplete = region => {
     console.log('moved here ', region);
     this.setState({ region });
+
+    // AsyncStorage.removeItem('fb_token');
   };
 
   render() {
