@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
-
-import { StyleSheet, Alert, Text, TouchableOpacity, View } from 'react-native';
-
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 import { Facebook } from 'expo';
 
+import * as actions from '../actions';
+
 class AuthScreen extends Component {
-  async logIn() {
-    const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-      '1773862909315353',
-      {
-        permissions: ['public_profile', 'email']
-      }
-    );
-    console.log('LOGIN', type, token);
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`
-      );
-      const data = await response.json();
-      Alert.alert('Logged in!', `Hi ${data.name}!`);
-      console.log('DATA: ', data);
-    }
+  componentDidMount() {
+    this.props.facebookLogin();
+    // AsyncStorage.removeItem('fb_token');
   }
 
   render() {
@@ -31,14 +18,7 @@ class AuthScreen extends Component {
           <Text style={styles.welcomeText}> Welcome!</Text>
         </View>
 
-        <View style={styles.loginContainer}>
-          <TouchableOpacity
-            onPress={() => this.logIn()}
-            style={styles.loginButton}
-          >
-            <Text style={styles.loginButtonText}>Login with Facebook</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.loginContainer} />
       </View>
     );
   }
@@ -76,4 +56,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AuthScreen;
+export default connect(null, actions)(AuthScreen);
