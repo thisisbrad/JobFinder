@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
+import { AppLoading } from 'expo';
 import _ from 'lodash';
 import Slides from '../components/Slides';
 
@@ -10,10 +11,27 @@ const SLIDE_DATA = [
 ];
 
 class WelcomeScreen extends Component {
+  state = { token: null };
+
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem('fb_token');
+    if (token) {
+      console.log('ping', token);
+      this.props.navigation.navigate('map');
+    } else {
+      this.setState({ token: false });
+      console.log('pong', this.state.token);
+    }
+  }
+
   onComplete = () => {
     this.props.navigation.navigate('auth');
   };
+
   render() {
+    if (this.state.token === null) {
+      return <AppLoading />;
+    }
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
