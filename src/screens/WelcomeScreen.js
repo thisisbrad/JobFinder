@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import _ from 'lodash';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
