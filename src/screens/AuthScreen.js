@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  Image,
-  Linking,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Alert,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { StyleSheet, Alert, Text, TouchableOpacity, View } from 'react-native';
 
 import { Facebook } from 'expo';
 

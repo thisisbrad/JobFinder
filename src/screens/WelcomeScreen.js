@@ -10,7 +10,6 @@ const SLIDE_DATA = [
 
 class WelcomeScreen extends Component {
   onComplete = () => {
-    console.log('HOLLA!', this.props);
     this.props.navigation.navigate('auth');
   };
   render() {
