@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
-import { AppLoading } from 'expo';
+import { AppLoading, Font } from 'expo';
 import _ from 'lodash';
 import Slides from '../components/Slides';
 
@@ -14,6 +14,10 @@ class WelcomeScreen extends Component {
   state = { token: null };
 
   async componentDidMount() {
+    await Font.loadAsync({
+      quicksand: require('../assets/fonts/Quicksand-Regular.ttf'),
+      barlow: require('../assets/fonts/BarlowCondensed-Regular.ttf')
+    });
     const token = await AsyncStorage.getItem('fb_token');
     if (token) {
       console.log('ping', token);
