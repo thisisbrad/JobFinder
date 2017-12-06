@@ -31,8 +31,9 @@ class MapScreen extends Component {
   };
 
   onJobSearch = () => {
-    // console.log('data', this.props);
-    this.props.fecthJobs(this.state.region);
+    this.props.fetchJobs(this.state.region, () => {
+      this.props.navigation.navigate('deck');
+    });
   };
 
   render() {
