@@ -14,9 +14,10 @@ class WelcomeScreen extends Component {
   state = { token: null };
 
   async componentDidMount() {
-    // await Font.loadAsync({
-    //   quicksand: require('../assets/fonts/Quicksand-Regular.ttf')
-    // });
+    await Font.loadAsync({
+      quicksand: require('../assets/fonts/Quicksand-Regular.ttf')
+    });
+    console.log('first');
     const token = await AsyncStorage.getItem('fb_token');
     if (token) {
       console.log('ping', token);
@@ -32,6 +33,9 @@ class WelcomeScreen extends Component {
   };
 
   render() {
+    if (this.state.token === null) {
+      return <AppLoading />;
+    }
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
