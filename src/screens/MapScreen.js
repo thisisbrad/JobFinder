@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, AsyncStorage } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity
+  // AsyncStorage
+} from 'react-native';
 import { MapView } from 'expo';
+import { connect } from 'react-redux';
+
+import * as actions from '../actions';
 
 import { mapStyle } from '../config';
 
@@ -21,6 +30,11 @@ class MapScreen extends Component {
     // AsyncStorage.removeItem('fb_token');
   };
 
+  onJobSearch = () => {
+    // console.log('data', this.props);
+    this.props.fecthJobs(this.state.region);
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -31,6 +45,14 @@ class MapScreen extends Component {
           customMapStyle={mapStyle}
           style={styles.map}
         />
+        <View style={styles.searchArea}>
+          <TouchableOpacity
+            style={styles.searchButton}
+            onPress={this.onJobSearch}
+          >
+            <Text style={styles.searchButtonText}>Search Jobs!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -43,7 +65,20 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1
-  }
+  },
+  searchArea: {
+    position: 'absolute',
+    margin: 20,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  searchButton: {
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: '#FFBE0B'
+  },
+  searchButtonText: { color: '#745705' }
 });
 
-export default MapScreen;
+export default connect(null, actions)(MapScreen);
