@@ -5,8 +5,7 @@ import {
   PanResponder,
   Dimensions,
   LayoutAnimation,
-  UIManager,
-  Platform
+  UIManager
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -16,8 +15,7 @@ const SWIPE_OUT_DURATION = 250;
 class Swipe extends Component {
   static defaultProps = {
     onSwipeRight: () => {},
-    onSwipeLeft: () => {},
-    keyProp: 'id'
+    onSwipeLeft: () => {}
   };
 
   constructor(props) {
@@ -93,40 +91,40 @@ class Swipe extends Component {
 
   renderCards() {
     if (this.state.index >= this.props.data.length) {
-      return this.props.renderNoMoreCards();
+      // return this.props.renderNoMoreCards();
     }
 
-    const deck = this.props.data.map((item, i) => {
-      if (i < this.state.index) {
-        return null;
-      }
+    return this.props.data
+      .map((item, i) => {
+        if (i < this.state.index) {
+          return null;
+        }
 
-      if (i === this.state.index) {
+        if (i === this.state.index) {
+          return (
+            <Animated.View
+              key={item.id}
+              style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
+              {...this.state.panResponder.panHandlers}
+            >
+              {this.props.renderCard(item)}
+            </Animated.View>
+          );
+        }
+
         return (
           <Animated.View
-            key={item[this.props.keyProp]}
-            style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
-            {...this.state.panResponder.panHandlers}
+            key={item.id}
+            style={[
+              styles.cardStyle,
+              { top: 10 * (i - this.state.index), zIndex: 5 }
+            ]}
           >
             {this.props.renderCard(item)}
           </Animated.View>
         );
-      }
-
-      return (
-        <Animated.View
-          key={item[this.props.keyProp]}
-          style={[
-            styles.cardStyle,
-            { top: 10 * (i - this.state.index), zIndex: -i }
-          ]}
-        >
-          {this.props.renderCard(item)}
-        </Animated.View>
-      );
-    });
-
-    return Platform.OS === 'android' ? deck : deck.reverse();
+      })
+      .reverse();
   }
 
   render() {

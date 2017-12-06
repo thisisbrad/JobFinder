@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { MapView } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 import Swipe from '../components/Swipe';
 
 class DeckScreen extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log('JEEZ', nextProps, this.props.jobs);
-    console.log('NO WAY', this.props.jobs);
-  }
+  renderCard = job => {
+    return (
+      <View style={styles.card}>
+        <Text> {job.jobTitle} </Text>
+        <View>
+          <Text>Hey</Text>
+        </View>
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
-        <Text>Deck Screen</Text>
-        <Text>{console.log('jobs', this.props.jobs)}</Text>
+        <Swipe data={this.props.jobs} renderCard={this.renderCard} />
       </View>
     );
   }
@@ -24,22 +31,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#8338EC'
   },
-  map: {
-    flex: 1
-  },
-  searchArea: {
-    position: 'absolute',
-    margin: 20,
-    bottom: 0,
-    left: 0,
-    right: 0
-  },
-  searchButton: {
-    padding: 10,
-    alignItems: 'center',
+  card: {
+    flex: 1,
     backgroundColor: '#FFBE0B'
-  },
-  searchButtonText: { color: '#745705' }
+  }
 });
 
 function mapStateToProps({ jobs }) {

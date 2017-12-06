@@ -7,8 +7,7 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_JOBS:
-      console.log('in reducer');
-      return { jobs: action.payload };
+      return action.payload;
     default:
       return state;
   }
