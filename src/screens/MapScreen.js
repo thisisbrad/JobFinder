@@ -7,6 +7,7 @@ import {
   // AsyncStorage
 } from 'react-native';
 import { MapView } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -30,10 +31,9 @@ class MapScreen extends Component {
     // AsyncStorage.removeItem('fb_token');
   };
 
-  onJobSearch = () => {
-    this.props.fetchJobs(this.state.region, () => {
-      this.props.navigation.navigate('deck');
-    });
+  onJobSearch = async () => {
+    await this.props.fetchJobs(this.state.region);
+    this.props.navigation.navigate('deck');
   };
 
   render() {
@@ -51,6 +51,7 @@ class MapScreen extends Component {
             style={styles.searchButton}
             onPress={this.onJobSearch}
           >
+            <Ionicons name="md-search" size={22} color="white" />
             <Text style={styles.searchButtonText}>Search Jobs!</Text>
           </TouchableOpacity>
         </View>
@@ -77,9 +78,11 @@ const styles = StyleSheet.create({
   searchButton: {
     padding: 10,
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
     backgroundColor: '#FFBE0B'
   },
-  searchButtonText: { color: '#745705' }
+  searchButtonText: { marginLeft: 10, color: '#745705' }
 });
 
 export default connect(null, actions)(MapScreen);

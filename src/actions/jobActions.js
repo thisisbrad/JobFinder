@@ -18,15 +18,14 @@ const buildJobsUrl = zip => {
   return `${JOB_ROOT_URL}${query}`;
 };
 
-export const fetchJobs = (region, callback) => async dispatch => {
+export const fetchJobs = region => async dispatch => {
   //
   try {
     const zip = await reverseGeocode(region);
     const url = buildJobsUrl(zip);
     const { data } = await axios.get(url);
-    console.log('DATA: ', data);
+    console.log('in action');
     dispatch({ type: FETCH_JOBS, payload: data });
-    callback();
   } catch (error) {
     console.error('ERROR: ', error);
   }
