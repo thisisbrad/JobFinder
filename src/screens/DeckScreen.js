@@ -31,12 +31,14 @@ class DeckScreen extends Component {
             initialRegion={initialRegion}
           />
         </View>
-        <Text> {job.jobtitle} </Text>
+        <Text style={styles.jobTitle}> {job.jobtitle} </Text>
         <View style={styles.jobDetails}>
           <Text>{job.company}</Text>
           <Text>{job.formattedRelativeTime}</Text>
         </View>
-        <Text>{job.snippet.replace(/<\/*b>/g, '')}</Text>
+        <Text style={styles.jobDescription}>
+          {job.snippet.replace(/<\/*b>/g, '')}
+        </Text>
       </View>
     );
   };
@@ -74,6 +76,15 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 12,
     backgroundColor: '#FFBE0B'
+    // borderWidth: 1,
+    // borderRadius: 2,
+    // borderColor: '#FFD563',
+    // borderBottomWidth: 0,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 2,
+    // elevation: 1
   },
   map: {
     flex: 1
@@ -81,10 +92,15 @@ const styles = StyleSheet.create({
   mapContainer: {
     height: 300
   },
+  jobTitle: { fontFamily: 'quicksand' },
   jobDetails: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10
+  },
+  jobDescription: {
+    fontFamily: 'quicksand',
+    color: 'white'
   }
 });
 

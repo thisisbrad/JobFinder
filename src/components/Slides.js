@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   slideText: {
     fontSize: 34,
-    // fontFamily: 'quicksand',
+    fontFamily: 'quicksand',
     color: 'white'
   },
   slideButton: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFBE0B'
   },
   slideButtonText: {
-    // fontFamily: 'quicksand',
+    fontFamily: 'quicksand',
     color: '#745705'
   }
 });
