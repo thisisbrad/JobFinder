@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, Button, StyleSheet, Platform } from 'react-native';
+import {
+  Text,
+  View,
+  Button,
+  ScrollView,
+  StyleSheet,
+  Platform
+} from 'react-native';
 import { connect } from 'react-redux';
 
 class ReviewScreen extends Component {
@@ -16,10 +23,24 @@ class ReviewScreen extends Component {
       marginTop: Platform.OS === 'android' ? 24 : 0
     }
   });
+
+  renderLikedJobs = () => {
+    return this.props.likes.map(job => {
+      return (
+        <View style={styles.card} key={job.jobkey}>
+          <View style={styles.jobDetails}>
+            <Text>{job.company}</Text>
+            <Text>{job.formattedRelativeTime}</Text>
+          </View>
+        </View>
+      );
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Review Screen</Text>
+        <ScrollView>{this.renderLikedJobs()}</ScrollView>
       </View>
     );
   }
@@ -36,6 +57,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 20,
     padding: 12
+  },
+  card: {
+    flex: 1,
+    margin: 20,
+    padding: 12,
+    backgroundColor: '#FFBE0B'
+  },
+  jobDetails: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10
   }
 });
 
@@ -43,4 +75,4 @@ function mapStateToProps(state) {
   return { likes: state.likes };
 }
 
-export default connect()(ReviewScreen);
+export default connect(mapStateToProps)(ReviewScreen);
