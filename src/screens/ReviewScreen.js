@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { Text, View, Button, StyleSheet, Platform } from 'react-native';
+import { connect } from 'react-redux';
 
 class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -17,11 +18,29 @@ class ReviewScreen extends Component {
   });
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Review Screen</Text>
       </View>
     );
   }
 }
 
-export default ReviewScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#3A86FF'
+  },
+  jobs: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 20,
+    padding: 12
+  }
+});
+
+function mapStateToProps(state) {
+  return { likes: state.likes };
+}
+
+export default connect()(ReviewScreen);
