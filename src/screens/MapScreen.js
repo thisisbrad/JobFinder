@@ -3,8 +3,8 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableOpacity
-  // AsyncStorage
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { MapView } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
@@ -28,7 +28,7 @@ class MapScreen extends Component {
     console.log('moved here ', region);
     this.setState({ region });
 
-    // AsyncStorage.removeItem('fb_token');
+    AsyncStorage.removeItem('fb_token');
   };
 
   onJobSearch = async () => {
@@ -82,7 +82,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFBE0B'
   },
-  searchButtonText: { marginLeft: 10, color: '#745705' }
+  searchButtonText: {
+    marginLeft: 10,
+    color: '#745705',
+    fontFamily: 'quicksand'
+  }
 });
 
 export default connect(null, actions)(MapScreen);
