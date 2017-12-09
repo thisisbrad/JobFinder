@@ -28,7 +28,7 @@ class MapScreen extends Component {
     console.log('moved here ', region);
     this.setState({ region });
 
-    AsyncStorage.removeItem('fb_token');
+    // AsyncStorage.removeItem('fb_token');
   };
 
   onJobSearch = async () => {

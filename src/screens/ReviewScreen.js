@@ -5,6 +5,7 @@ import {
   Button,
   ScrollView,
   StyleSheet,
+  Linking,
   Platform
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -19,19 +20,26 @@ class ReviewScreen extends Component {
       />
     ),
     headerStyle: {
-      //If the app is running on Android assign 24 to marginTop, if not, assign 0 to marginTop
+      // If the app is running on Android assign 24 to marginTop, if not, assign 0 to marginTop
       marginTop: Platform.OS === 'android' ? 24 : 0
     }
   });
 
   renderLikedJobs = () => {
     return this.props.likes.map(job => {
+      const { jobkey, company, formattedRelativeTime, url } = job;
+
       return (
-        <View style={styles.card} key={job.jobkey}>
+        <View style={styles.card} key={jobkey}>
           <View style={styles.jobDetails}>
-            <Text>{job.company}</Text>
-            <Text>{job.formattedRelativeTime}</Text>
+            <Text>{company}</Text>
+            <Text>{formattedRelativeTime}</Text>
           </View>
+          <Button
+            style={styles.jobButton}
+            title="Settings"
+            onPress={() => Linking.openURL(url)}
+          />
         </View>
       );
     });
@@ -68,6 +76,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10
+  },
+  jobButton: {
+    backgroundColor: 'white'
   }
 });
 
