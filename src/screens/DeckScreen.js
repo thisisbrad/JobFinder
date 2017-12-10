@@ -33,8 +33,8 @@ class DeckScreen extends Component {
         </View>
         <Text style={styles.jobTitle}> {job.jobtitle} </Text>
         <View style={styles.jobDetails}>
-          <Text>{job.company}</Text>
-          <Text>{job.formattedRelativeTime}</Text>
+          <Text style={styles.jobDetailsText}>{job.company}</Text>
+          <Text style={styles.jobDetailsText}>{job.formattedRelativeTime}</Text>
         </View>
         <Text style={styles.jobDescription}>
           {job.snippet.replace(/<\/*b>/g, '')}
@@ -92,11 +92,19 @@ const styles = StyleSheet.create({
   mapContainer: {
     height: 300
   },
-  jobTitle: { fontFamily: 'quicksand' },
+  jobTitle: {
+    color: '#745705',
+    fontFamily: 'quicksand',
+    fontSize: 18
+  },
   jobDetails: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10
+  },
+  jobDetailsText: {
+    color: '#745705',
+    fontFamily: 'quicksand'
   },
   jobDescription: {
     fontFamily: 'quicksand',

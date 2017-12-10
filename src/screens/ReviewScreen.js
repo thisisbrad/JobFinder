@@ -55,6 +55,7 @@ class ReviewScreen extends Component {
 
       return (
         <View style={styles.card} key={jobkey}>
+          <Text style={styles.jobTitle}>{jobtitle}</Text>
           {/* 
               Custom maps not loading correctly right now
               it's not the custom map JSON loading, 
@@ -73,8 +74,8 @@ class ReviewScreen extends Component {
             <MapView.Marker coordinate={latlng} pinColor="#8338EC" />
           </MapView>
           <View style={styles.jobDetails}>
-            <Text>{company}</Text>
-            <Text>{formattedRelativeTime}</Text>
+            <Text style={styles.jobDetailsText}>{company}</Text>
+            <Text style={styles.jobDetailsText}>{formattedRelativeTime}</Text>
           </View>
           <TouchableOpacity
             style={styles.jobButton}
@@ -119,14 +120,25 @@ const styles = StyleSheet.create({
   map: {
     flex: 1
   },
+  jobTitle: {
+    color: '#745705',
+    fontFamily: 'quicksand',
+    fontSize: 18,
+    marginBottom: 8
+  },
   jobDetails: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10
+    marginVertical: 10
+  },
+  jobDetailsText: {
+    color: '#745705',
+    fontFamily: 'quicksand'
   },
   jobButton: {
     alignItems: 'center',
-    padding: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     backgroundColor: 'white'
   },
   jobButtonText: {
