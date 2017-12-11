@@ -1,14 +1,50 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { clearLikedJobs } from '../actions';
 
 class SettingsScreen extends Component {
   render() {
     return (
-      <View>
-        <Text>Settings Screen</Text>
+      <View style={styles.container}>
+        <View style={styles.jobs}>
+          <TouchableOpacity
+            style={styles.jobButton}
+            onPress={this.props.clearLikedJobs}
+          >
+            <MaterialIcons name="delete-forever" size={22} color="white" />
+            <Text style={styles.jobButtonText}>Clear liked Jobs</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
-export default SettingsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#3A86FF'
+  },
+  jobs: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    padding: 12
+  },
+  jobButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#FFBE0B'
+  },
+  jobButtonText: {
+    color: '#745705',
+    fontFamily: 'quicksand'
+  }
+});
+
+export default connect(null, { clearLikedJobs })(SettingsScreen);

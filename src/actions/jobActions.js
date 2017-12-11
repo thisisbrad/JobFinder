@@ -35,5 +35,5 @@ export const likeJob = job => {
 };
 
 export const clearLikedJobs = () => {
-  return { type: CLEARED_LIKED_JOBS };
+  return { type: CLEAR_LIKED_JOBS };
 };
