@@ -19,16 +19,29 @@ export default class App extends React.Component {
         welcome: { screen: WelcomeScreen },
         auth: { screen: AuthScreen },
         main: {
-          screen: TabNavigator({
-            map: { screen: MapScreen },
-            deck: { screen: DeckScreen },
-            review: {
-              screen: StackNavigator({
-                review: { screen: ReviewScreen },
-                settings: { screen: SettingsScreen }
-              })
+          screen: TabNavigator(
+            {
+              map: { screen: MapScreen },
+              deck: { screen: DeckScreen },
+              review: {
+                screen: StackNavigator({
+                  review: { screen: ReviewScreen },
+                  settings: { screen: SettingsScreen }
+                })
+              }
+            },
+            {
+              tabBarPosition: 'bottom',
+              tabBarOptions: {
+                activeTintColor: 'white',
+                activeBackgroundColor: '#FFBE0B',
+                labelStyle: { fontSize: 14 },
+                tabStyle: {
+                  padding: 5
+                }
+              }
             }
-          })
+          )
         }
       },
       {

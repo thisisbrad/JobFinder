@@ -11,6 +11,13 @@ import * as actions from '../actions';
 import { mapStyle } from '../config';
 
 class DeckScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    tabBarLabel: 'Map',
+    tabBarIcon: ({ tintColor }) => {
+      return <MaterialIcons name="description" size={22} color={tintColor} />;
+    }
+  });
+
   renderCard = job => {
     const initialRegion = {
       longitude: job.longitude,

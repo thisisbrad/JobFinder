@@ -4,10 +4,12 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Button,
+  Platform,
   AsyncStorage
 } from 'react-native';
 import { MapView } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -15,6 +17,13 @@ import * as actions from '../actions';
 import { mapStyle } from '../config';
 
 class MapScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    tabBarLabel: 'Map',
+    tabBarIcon: ({ tintColor }) => {
+      return <MaterialIcons name="my-location" size={22} color={tintColor} />;
+    }
+  });
+
   state = {
     region: {
       longitude: -122,
@@ -51,7 +60,7 @@ class MapScreen extends Component {
             style={styles.searchButton}
             onPress={this.onJobSearch}
           >
-            <Ionicons name="md-search" size={22} color="white" />
+            <MaterialIcons name="search" size={22} color="white" />
             <Text style={styles.searchButtonText}>Search Jobs!</Text>
           </TouchableOpacity>
         </View>

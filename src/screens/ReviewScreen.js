@@ -10,6 +10,7 @@ import {
   Platform
 } from 'react-native';
 import { MapView } from 'expo';
+import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 import { mapStyle } from '../config';
@@ -17,6 +18,9 @@ import { mapStyle } from '../config';
 class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Review Jobs',
+    tabBarIcon: ({ tintColor }) => {
+      return <MaterialIcons name="favorite" size={22} color={tintColor} />;
+    },
     headerRight: (
       <Button
         title="Settings"
