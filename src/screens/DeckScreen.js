@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import Swipe from '../components/Swipe';
 
@@ -46,7 +46,13 @@ class DeckScreen extends Component {
   renderNoMoreCards = () => {
     return (
       <View style={styles.card}>
-        <Text>No More Cards!!</Text>
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => this.props.navigation.navigate('map')}
+        >
+          <MaterialIcons name="my-location" size={22} color="white" />
+          <Text style={styles.searchButtonText}>Back to Jobs Map</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -72,19 +78,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#8338EC'
   },
   card: {
-    flex: 1,
     margin: 20,
     padding: 12,
     backgroundColor: '#FFBE0B'
-    // borderWidth: 1,
-    // borderRadius: 2,
-    // borderColor: '#FFD563',
-    // borderBottomWidth: 0,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.4,
-    // shadowRadius: 2,
-    // elevation: 1
   },
   map: {
     flex: 1
@@ -109,6 +105,20 @@ const styles = StyleSheet.create({
   jobDescription: {
     fontFamily: 'quicksand',
     color: 'white'
+  },
+  searchButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#FFBE0B',
+    height: 30
+  },
+  searchButtonText: {
+    color: '#745705',
+    fontFamily: 'quicksand',
+    marginLeft: 10
   }
 });
 

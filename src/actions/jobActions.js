@@ -19,7 +19,6 @@ const buildJobsUrl = zip => {
 };
 
 export const fetchJobs = region => async dispatch => {
-  //
   try {
     const zip = await reverseGeocode(region);
     const url = buildJobsUrl(zip);
