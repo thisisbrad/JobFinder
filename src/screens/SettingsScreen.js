@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import { clearLikedJobs } from '../actions';
 
 class SettingsScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Review Jobs',
+    tabBarIcon: ({ tintColor }) => {
+      return <MaterialIcons name="favorite" size={22} color={tintColor} />;
+    }
+  });
   render() {
     return (
       <View style={styles.container}>
