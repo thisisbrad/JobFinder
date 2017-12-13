@@ -20,12 +20,12 @@ class WelcomeScreen extends Component {
     console.log('first');
     const token = await AsyncStorage.getItem('fb_token');
     if (token) {
-      console.log('ping', token);
+      // console.log('ping', token);
       this.setState({ token });
       this.props.navigation.navigate('map');
     } else {
       this.setState({ token: false });
-      console.log('pong', this.state.token);
+      // console.log('pong', this.state.token);
     }
   }
 
