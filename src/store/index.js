@@ -25,9 +25,3 @@ exports.configureStore = (initialState = {}) => {
 
   return { persistor, store };
 };
-
-// export const store = createStore(
-//   rootReducer,
-//   {},
-//   composeEnhancers(applyMiddleware(thunk))
-// );
