@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
+import { Notifications } from 'expo';
 
 import { configureStore } from './src/store';
 const { persistor, store } = configureStore();
 
-// import registerForNotifications from './src/services/push_notifications';
+import registerForNotifications from './src/services/push_notifications';
 
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import AuthScreen from './src/screens/AuthScreen';
@@ -17,6 +18,17 @@ import ReviewScreen from './src/screens/ReviewScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
 export default class App extends React.Component {
+  componentDidMount() {
+    registerForNotifications();
+    Notifications.addListener(notification => {
+      const { data: { text }, origin } = notification;
+
+      if (origin === 'received' && text) {
+        Alert.alert('New Push Notification', text, [{ text: 'Ok.' }]);
+      }
+    });
+  }
+
   render() {
     const MainNavigator = TabNavigator(
       {

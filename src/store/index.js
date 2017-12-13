@@ -9,9 +9,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
   key: 'main',
   storage,
-  whitelist: ['likes']
+  whitelist: ['likes'],
+  debug: true
 };
-config.debug = true;
+// config.debug = true;
 
 const reducer = persistReducer(config, rootReducer);
 

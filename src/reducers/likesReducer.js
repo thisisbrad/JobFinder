@@ -5,7 +5,7 @@ import { LIKE_JOB, CLEAR_LIKED_JOBS } from '../actions/types';
 export default function(state = [], action) {
   switch (action.type) {
     case REHYDRATE:
-      console.log('trigger', action);
+      console.log('REALLY???', action);
       return action.payload.likes || [];
     case LIKE_JOB:
       return _.uniqBy([action.payload, ...state], 'jobkey');
