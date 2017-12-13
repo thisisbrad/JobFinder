@@ -19,7 +19,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "expo": "^23.0.4",
+    "latlng-to-zip": "^0.0.1",
+    "lodash": "^4.17.4",
+    "qs": "^6.5.1",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-navigation": "^1.0.0-beta.21",

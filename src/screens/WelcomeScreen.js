@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
+import { AppLoading, Font } from 'expo';
+import _ from 'lodash';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
@@ -9,17 +11,39 @@ const SLIDE_DATA = [
 ];
 
 class WelcomeScreen extends Component {
+  state = { token: null };
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      quicksand: require('../assets/fonts/Quicksand-Regular.ttf')
+    });
+    console.log('first');
+    const token = await AsyncStorage.getItem('fb_token');
+    if (token) {
+      console.log('ping', token);
+      this.setState({ token });
+      this.props.navigation.navigate('map');
+    } else {
+      this.setState({ token: false });
+      console.log('pong', this.state.token);
+    }
+  }
+
   onComplete = () => {
-    console.log('HOLLA!', this.props);
     this.props.navigation.navigate('auth');
   };
+
   render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Slides data={SLIDE_DATA} onComplete={this.onComplete} />
-      </View>
-    );
+    if (this.state.token === null) {
+      return <AppLoading />;
+    } else {
+      return (
+        <View style={styles.container}>
+          <StatusBar barStyle="light-content" />
+          <Slides data={SLIDE_DATA} onComplete={this.onComplete} />
+        </View>
+      );
+    }
   }
 }
 

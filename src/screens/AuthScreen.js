@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
-
-import {
-  Image,
-  Linking,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Alert,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
+import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Facebook } from 'expo';
 
+import * as actions from '../actions';
+
 class AuthScreen extends Component {
-  async logIn() {
-    const { type, token } = await Facebook.logInWithReadPermissionsAsync(
-      '1773862909315353',
-      {
-        permissions: ['public_profile', 'email']
-      }
-    );
-    console.log('LOGIN', type, token);
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`
-      );
-      const data = await response.json();
-      Alert.alert('Logged in!', `Hi ${data.name}!`);
-      console.log('DATA: ', data);
+  componentDidMount() {
+    this.props.facebookLogin();
+    this.onAuthComplete(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.onAuthComplete(nextProps);
+  }
+
+  onAuthComplete(props) {
+    if (props.token) {
+      this.props.navigation.navigate('map');
     }
   }
 
@@ -41,14 +28,7 @@ class AuthScreen extends Component {
           <Text style={styles.welcomeText}> Welcome!</Text>
         </View>
 
-        <View style={styles.loginContainer}>
-          <TouchableOpacity
-            onPress={() => this.logIn()}
-            style={styles.loginButton}
-          >
-            <Text style={styles.loginButtonText}>Login with Facebook</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.loginContainer} />
       </View>
     );
   }
@@ -57,7 +37,7 @@ class AuthScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8338EC'
+    backgroundColor: '#FFBE0B'
   },
   welcomeContainer: {
     flex: 2,
@@ -86,4 +66,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AuthScreen;
+function mapStateToProps({ auth }) {
+  return { token: auth.token };
+}
+
+export default connect(mapStateToProps, actions)(AuthScreen);

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
+import { Font } from 'expo';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
   },
   slideText: {
     fontSize: 34,
+    fontFamily: 'quicksand',
     color: 'white'
   },
   slideButton: {
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFBE0B'
   },
   slideButtonText: {
+    fontFamily: 'quicksand',
     color: '#745705'
   }
 });
