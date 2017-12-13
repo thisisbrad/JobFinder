@@ -6,15 +6,15 @@ const PUSH_ENDPOINT = 'http://rallycoding.herokuapp.com/api/tokens';
 
 export default async () => {
   const previousToken = await AsyncStorage.getItem('pushtoken');
-  console.log('PUSH TOKEN ', previousToken);
+  // console.log('PUSH TOKEN ', previousToken);
   if (previousToken) {
     return;
   } else {
     let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    console.log('Lets ask! ', status);
+    // console.log('Lets ask! ', status);
 
     if (status !== 'granted') {
-      console.log('BYE! ', status);
+      // console.log('BYE! ', status);
       return;
     }
 
