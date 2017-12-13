@@ -6,7 +6,7 @@ export default function(state = [], action) {
   switch (action.type) {
     case REHYDRATE:
       console.log('REALLY???', action);
-      return action.payload || [];
+      return action.payload.likes || [];
     case LIKE_JOB:
       return _.uniqBy([action.payload, ...state], 'jobkey');
     case CLEAR_LIKED_JOBS:
