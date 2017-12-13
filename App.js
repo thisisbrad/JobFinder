@@ -7,6 +7,8 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 import { configureStore } from './src/store';
 const { persistor, store } = configureStore();
 
+import registerForNotifications from './src/services/push_notifications';
+
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import AuthScreen from './src/screens/AuthScreen';
 import MapScreen from './src/screens/MapScreen';
@@ -15,6 +17,9 @@ import ReviewScreen from './src/screens/ReviewScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
 export default class App extends React.Component {
+  componentDidMount() {
+    registerForNotifications();
+  }
   render() {
     const MainNavigator = TabNavigator(
       {
