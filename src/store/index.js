@@ -8,7 +8,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const config = {
   key: 'main',
-  storage
+  storage,
+  whitelist: ['likes']
 };
 config.debug = true;
 
